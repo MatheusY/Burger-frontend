@@ -1,0 +1,9 @@
+.body {
+  display: grid;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.menu {
+  width: 75%;
+}

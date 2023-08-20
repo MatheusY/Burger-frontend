@@ -1,0 +1,16 @@
+.product {
+  border: 1px;
+  border-color: rgb(199, 198, 198);
+  border-radius: 5px;
+  border-style: solid;
+  padding: 1em;
+  margin: 1em;
+}
+
+.product:hover {
+  border-color: rgb(83, 83, 83);
+}
+
+.text {
+  margin-bottom: 0px;
+}
