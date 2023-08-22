@@ -6,6 +6,7 @@ import classes from "./MenuProductType.module.css";
 interface MenuProductTypeProps {
   title: string;
   products: IProduct[];
+  onAddToCart: (product: IProduct) => void;
 }
 
 const MenuProductType = (props: MenuProductTypeProps) => {
@@ -18,11 +19,7 @@ const MenuProductType = (props: MenuProductTypeProps) => {
       </Row>
       <div className={classes.product}>
         {props.products.map((product) => (
-          <MenuProduct
-            name={product.name}
-            description={product.description}
-            price={product.price}
-          />
+          <MenuProduct product={product} onClick={props.onAddToCart} />
         ))}
       </div>
     </Container>

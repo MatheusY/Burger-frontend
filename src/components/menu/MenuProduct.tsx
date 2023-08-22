@@ -1,23 +1,26 @@
 import { Row } from "react-bootstrap";
 import classes from "./MenuProduct.module.css";
+import { IProduct } from "../../models/Product";
 
-export interface MenuProductProps {
-  name: string;
-  description: string;
-  price: number;
+interface MenuProductProps {
+  product: IProduct;
+  onClick: (product: IProduct) => void;
 }
 
 const MenuProduct = (props: MenuProductProps) => {
   return (
-    <div className={`${classes.product}`}>
+    <div
+      className={`${classes.product}`}
+      onClick={() => props.onClick(props.product)}
+    >
       <Row>
-        <b className={classes.text}>{props.name}</b>
+        <b className={classes.text}>{props.product.name}</b>
       </Row>
       <Row>
-        <p className={classes.text}>{props.description}</p>
+        <p className={classes.text}>{props.product.description}</p>
       </Row>
       <Row>
-        <p className={classes.text}>{`R$${props.price}`}</p>
+        <p className={classes.text}>{`R$${props.product.price}`}</p>
       </Row>
     </div>
   );
