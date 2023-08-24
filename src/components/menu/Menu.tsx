@@ -10,7 +10,7 @@ const Menu = () => {
   const { productStore } = useStore();
   const { fetchProducts } = productStore;
   const [products, setProducts] = useState([] as IProduct[]);
-  const [isProductModalOpen, setIsProductModalOpen] = useState(true);
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({} as IProduct);
 
   useEffect(() => {
@@ -18,7 +18,6 @@ const Menu = () => {
   }, [fetchProducts]);
 
   const handleOpenModalProduct = (product: IProduct) => {
-    console.log("Open");
     setSelectedProduct(product);
     setIsProductModalOpen(true);
   };
@@ -27,7 +26,9 @@ const Menu = () => {
     setIsProductModalOpen(!isProductModalOpen);
   };
 
-  const handleSubmitModalOpen = (product: IProduct, quantity: number) => {};
+  const handleSubmitModalOpen = (product: IProduct, quantity: number) => {
+    handleCloseProductModal();
+  };
 
   return (
     <React.Fragment>

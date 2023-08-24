@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { IProduct } from "../../models/Product";
 import React from "react";
+import styles from "./ProductModal.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface ProductModalProps {
   isOpen: boolean;
@@ -26,57 +28,59 @@ const ProductModal = (props: ProductModalProps) => {
   };
 
   const increase = () => {
-    setQuantity(quantity + 1);
-    setSubtotal(quantity * product.price);
+    const currentQuantity = quantity + 1;
+    setQuantity(currentQuantity);
+    setSubtotal(currentQuantity * product.price);
   };
 
   return (
-    <div className="modal fade" id="productModal" role="dialong">
-      <div className="modal-dialog" role="document">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title" id="productModalTitle">
-              {product.name}
-            </h5>
-            <button type="button" className="close" onClick={onClose}>
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div className="modal-body">
-            <p>{product.description}</p>
-          </div>
-          <div className="modal-footer">
-            <div className="btn-group">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={reduce}
-              >
-                -
-              </button>
-              <button type="button" className="btn btn-secondary">
-                <p>{quantity}</p>
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={increase}
-              >
-                +
-              </button>
-            </div>
+    <div className={styles.background} onClick={onClose}>
+      <div
+        className={styles.panel}
+        onClick={(event: any): void => event.stopPropagation()}
+      >
+        <div className={styles.header}>
+          <h5 className={styles.title}>{product.name}</h5>
+          <button className={styles.close_button} onClick={onClose}>
+            <FontAwesomeIcon icon="times" className={styles.close_icon} />
+          </button>
+        </div>
+        <div className={styles.body}>
+          <p>{product.description}</p>
+        </div>
+        <div className={styles.footer}>
+          <div className={`btn-group ${styles.group_quantity}`}>
             <button
               type="button"
-              className="btn btn-primary"
-              onClick={() => onSubmit(product, quantity)}
+              className={`btn btn-light ${styles.button}`}
+              onClick={reduce}
             >
-              <p>Adicionar ao pedido</p> <p>{`R$${subtotal}`}</p>{" "}
+              -
+            </button>
+            <div className={styles.quantity}>{quantity}</div>
+            <button
+              type="button"
+              className={`btn btn-light ${styles.button}`}
+              onClick={increase}
+            >
+              +
             </button>
           </div>
+          <button
+            type="button"
+            className={`btn btn-primary ${styles.submit}`}
+            onClick={() => onSubmit(product, quantity)}
+          >
+            <div className={styles.submit_text}>
+              <div>Adicionar ao pedido:</div>
+              {`R$${subtotal.toLocaleString("pt-br", {
+                minimumFractionDigits: 2,
+              })}`}
+            </div>
+          </button>
         </div>
       </div>
     </div>
   );
 };
-
 export default ProductModal;

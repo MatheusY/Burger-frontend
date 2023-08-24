@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { StoreProvider } from "./store/MainStore";
 import { AxiosInterceptor } from "./bootstrap/AxiosInterceptor";
+import { FontAwesomeProvider } from "./bootstrap/FontAwesomeProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -13,7 +14,9 @@ root.render(
   <StoreProvider>
     <AxiosInterceptor>
       <React.StrictMode>
-        <App />
+        <FontAwesomeProvider>
+          <App />
+        </FontAwesomeProvider>
       </React.StrictMode>
     </AxiosInterceptor>
   </StoreProvider>

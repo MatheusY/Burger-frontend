@@ -20,7 +20,12 @@ const MenuProduct = (props: MenuProductProps) => {
         <p className={classes.text}>{props.product.description}</p>
       </Row>
       <Row>
-        <p className={classes.text}>{`R$${props.product.price}`}</p>
+        <p className={classes.text}>{`R$${props.product.price.toLocaleString(
+          "pt-br",
+          {
+            minimumFractionDigits: 2,
+          }
+        )}`}</p>
       </Row>
     </div>
   );
