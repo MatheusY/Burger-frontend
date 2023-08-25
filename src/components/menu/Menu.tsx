@@ -7,8 +7,9 @@ import React from "react";
 import ProductModal from "./ProductModal";
 
 const Menu = () => {
-  const { productStore } = useStore();
+  const { productStore, cartStore } = useStore();
   const { fetchProducts } = productStore;
+  const { add } = cartStore;
   const [products, setProducts] = useState([] as IProduct[]);
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({} as IProduct);
@@ -27,6 +28,7 @@ const Menu = () => {
   };
 
   const handleSubmitModalOpen = (product: IProduct, quantity: number) => {
+    add(product, quantity);
     handleCloseProductModal();
   };
 

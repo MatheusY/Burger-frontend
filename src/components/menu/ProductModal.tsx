@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IProduct } from "../../models/Product";
 import React from "react";
 import styles from "./ProductModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useStore } from "../../store/MainStore";
 
 interface ProductModalProps {
   isOpen: boolean;
@@ -12,9 +13,17 @@ interface ProductModalProps {
 }
 
 const ProductModal = (props: ProductModalProps) => {
+  const { cartStore } = useStore();
+  const { getQuantityByProductId } = cartStore;
   const { product, isOpen, onClose, onSubmit } = props;
   const [subtotal, setSubtotal] = useState(0);
   const [quantity, setQuantity] = useState(0);
+
+  useEffect(() => {
+    const quantity = getQuantityByProductId(product.id);
+    setQuantity(quantity);
+    setSubtotal(quantity * product.price);
+  }, [setQuantity, getQuantityByProductId, product]);
 
   if (!isOpen) {
     return <React.Fragment />;
