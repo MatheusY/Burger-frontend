@@ -24,7 +24,7 @@ export class CartStore {
     const items = this.cart.items?.filter(
       (item) => item.product.id === productId
     );
-    return items.length > 0 ? items[0].quantity : 0;
+    return items.length > 0 ? items[0].quantity : 1;
   };
 
   setQuantityItems = (quantity: number): void => {

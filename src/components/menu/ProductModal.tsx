@@ -4,30 +4,34 @@ import React from "react";
 import styles from "./ProductModal.module.css";
 import { useStore } from "../../store/MainStore";
 import Modal from "../common/Modal";
+import { observer } from "mobx-react-lite";
 
-interface ProductModalProps {
+const ProductModal = ({
+  isOpen,
+  product,
+  initialQuantity,
+  onClose,
+  onSubmit,
+}: {
   isOpen: boolean;
   product: IProduct;
+  initialQuantity: number;
   onClose: () => void;
   onSubmit: (product: IProduct, quantity: number) => void;
-}
-
-const ProductModal = (props: ProductModalProps) => {
-  const { cartStore } = useStore();
-  const { getQuantityByProductId } = cartStore;
-  const { product, isOpen, onClose, onSubmit } = props;
+}) => {
   const [subtotal, setSubtotal] = useState(0);
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    const quantity = getQuantityByProductId(product.id);
-    setQuantity(quantity);
-    setSubtotal(quantity * product.price);
-  }, [setQuantity, getQuantityByProductId, product]);
+    setQuantity(initialQuantity);
+    setSubtotal(initialQuantity * product.price);
+  }, [initialQuantity, product, setQuantity, setSubtotal]);
 
   if (!isOpen) {
     return <React.Fragment />;
   }
+
+  const isMinimun = quantity === 1;
 
   const reduce = () => {
     if (quantity > 0) {
@@ -54,6 +58,7 @@ const ProductModal = (props: ProductModalProps) => {
             type="button"
             className={`btn btn-light ${styles.button}`}
             onClick={reduce}
+            disabled={isMinimun}
           >
             -
           </button>
@@ -82,4 +87,34 @@ const ProductModal = (props: ProductModalProps) => {
     </Modal>
   );
 };
-export default ProductModal;
+export default observer(
+  ({
+    isOpen,
+    product,
+    onClose,
+    onSubmit,
+  }: {
+    isOpen: boolean;
+    product: IProduct;
+    onClose: () => void;
+    onSubmit: (product: IProduct, quantity: number) => void;
+  }) => {
+    const { cartStore } = useStore();
+    const { getQuantityByProductId } = cartStore;
+    const [quantityInCart, setQuantityInCart] = useState(0);
+
+    useEffect(() => {
+      setQuantityInCart(getQuantityByProductId(product.id));
+    }, [setQuantityInCart, getQuantityByProductId, product]);
+
+    return (
+      <ProductModal
+        isOpen={isOpen}
+        product={product}
+        initialQuantity={quantityInCart}
+        onClose={onClose}
+        onSubmit={onSubmit}
+      />
+    );
+  }
+);

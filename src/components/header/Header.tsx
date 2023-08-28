@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import styles from "./Header.module.css";
 import HeaderCart from "./HeaderCart";
 
