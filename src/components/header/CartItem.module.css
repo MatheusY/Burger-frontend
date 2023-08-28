@@ -1,0 +1,33 @@
+.item_description {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item_action {
+  display: flex;
+  justify-content: flex-start;
+
+  > button {
+    color: rgb(79, 79, 245) !important;
+    border: none;
+    margin-top: -0.6em;
+    background: transparent;
+    padding: 0;
+    margin-right: 2em;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: smaller;
+
+    &:hover {
+      text-decoration: underline !important;
+    }
+  }
+}
+
+.edit:hover {
+  color: blue !important;
+}
+
+.remove:hover {
+  color: rgb(247, 77, 77) !important;
+}

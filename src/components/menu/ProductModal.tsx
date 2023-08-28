@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { IProduct } from "../../models/Product";
 import React from "react";
 import styles from "./ProductModal.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useStore } from "../../store/MainStore";
+import Modal from "../common/Modal";
 
 interface ProductModalProps {
   isOpen: boolean;
@@ -31,8 +31,9 @@ const ProductModal = (props: ProductModalProps) => {
 
   const reduce = () => {
     if (quantity > 0) {
-      setQuantity(quantity - 1);
-      setSubtotal(quantity * product.price);
+      const currentQuantity = quantity - 1;
+      setQuantity(currentQuantity);
+      setSubtotal(currentQuantity > 0 ? currentQuantity * product.price : 0);
     }
   };
 
@@ -43,53 +44,42 @@ const ProductModal = (props: ProductModalProps) => {
   };
 
   return (
-    <div className={styles.background} onClick={onClose}>
-      <div
-        className={styles.panel}
-        onClick={(event: any): void => event.stopPropagation()}
-      >
-        <div className={styles.header}>
-          <h5 className={styles.title}>{product.name}</h5>
-          <button className={styles.close_button} onClick={onClose}>
-            <FontAwesomeIcon icon="times" className={styles.close_icon} />
-          </button>
-        </div>
-        <div className={styles.body}>
-          <p>{product.description}</p>
-        </div>
-        <div className={styles.footer}>
-          <div className={`btn-group ${styles.group_quantity}`}>
-            <button
-              type="button"
-              className={`btn btn-light ${styles.button}`}
-              onClick={reduce}
-            >
-              -
-            </button>
-            <div className={styles.quantity}>{quantity}</div>
-            <button
-              type="button"
-              className={`btn btn-light ${styles.button}`}
-              onClick={increase}
-            >
-              +
-            </button>
-          </div>
+    <Modal title={product.name} onClose={onClose}>
+      <div className={styles.body}>
+        <p>{product.description}</p>
+      </div>
+      <div className={styles.footer}>
+        <div className={`btn-group ${styles.group_quantity}`}>
           <button
             type="button"
-            className={`btn btn-primary ${styles.submit}`}
-            onClick={() => onSubmit(product, quantity)}
+            className={`btn btn-light ${styles.button}`}
+            onClick={reduce}
           >
-            <div className={styles.submit_text}>
-              <div>Adicionar ao pedido:</div>
-              {`R$${subtotal.toLocaleString("pt-br", {
-                minimumFractionDigits: 2,
-              })}`}
-            </div>
+            -
+          </button>
+          <div className={styles.quantity}>{quantity}</div>
+          <button
+            type="button"
+            className={`btn btn-light ${styles.button}`}
+            onClick={increase}
+          >
+            +
           </button>
         </div>
+        <button
+          type="button"
+          className={`btn btn-primary ${styles.submit}`}
+          onClick={() => onSubmit(product, quantity)}
+        >
+          <div className={styles.submit_text}>
+            <div>Adicionar ao pedido:</div>
+            {`R$${subtotal.toLocaleString("pt-br", {
+              minimumFractionDigits: 2,
+            })}`}
+          </div>
+        </button>
       </div>
-    </div>
+    </Modal>
   );
 };
 export default ProductModal;

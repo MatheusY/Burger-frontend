@@ -1,0 +1,70 @@
+.background {
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 101;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  inset: 0;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  width: 50%;
+  height: 60%;
+  margin-top: 7%;
+  background-color: white;
+  z-index: 102;
+  padding: 15px 15px 5px 15px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px 7px 15px;
+  margin-bottom: 2em;
+}
+
+.title {
+  margin-top: 2px;
+}
+
+.content {
+  flex: 1;
+  position: relative;
+}
+
+.close_button {
+  background-color: transparent;
+  border: 0;
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+
+  &:hover,
+  &:active,
+  &:focus {
+    border: 0;
+    outline: 0;
+  }
+
+  &:hover,
+  &:active {
+    opacity: 1;
+  }
+
+  > .close_icon {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 22px;
+    color: gray;
+  }
+}

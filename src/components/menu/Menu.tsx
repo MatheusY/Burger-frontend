@@ -5,40 +5,30 @@ import MenuProductType from "./MenuProductType";
 import classes from "./Menu.module.css";
 import React from "react";
 import ProductModal from "./ProductModal";
+import { observer } from "mobx-react-lite";
 
-const Menu = () => {
-  const { productStore, cartStore } = useStore();
-  const { fetchProducts } = productStore;
-  const { add } = cartStore;
-  const [products, setProducts] = useState([] as IProduct[]);
-  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState({} as IProduct);
-
-  useEffect(() => {
-    fetchProducts().then((response) => setProducts(response));
-  }, [fetchProducts]);
-
-  const handleOpenModalProduct = (product: IProduct) => {
-    setSelectedProduct(product);
-    setIsProductModalOpen(true);
-  };
-
-  const handleCloseProductModal = () => {
-    setIsProductModalOpen(!isProductModalOpen);
-  };
-
-  const handleSubmitModalOpen = (product: IProduct, quantity: number) => {
-    add(product, quantity);
-    handleCloseProductModal();
-  };
-
+const Menu = ({
+  product,
+  products,
+  isProductModalOpen,
+  onAdd,
+  onOpenProductModal,
+  onCloseProductModal,
+}: {
+  product: IProduct;
+  products: IProduct[];
+  isProductModalOpen: boolean;
+  onAdd: (product: IProduct, quantity: number) => void;
+  onOpenProductModal: (product: IProduct) => void;
+  onCloseProductModal: () => void;
+}) => {
   return (
     <React.Fragment>
       <ProductModal
         isOpen={isProductModalOpen}
-        product={selectedProduct}
-        onClose={handleCloseProductModal}
-        onSubmit={handleSubmitModalOpen}
+        product={product}
+        onClose={onCloseProductModal}
+        onSubmit={onAdd}
       />
       <div className={`container-fluid ${classes.menu}`}>
         <h1 className="col-md-12 d-flex justify-content-center">Menu</h1>
@@ -47,18 +37,58 @@ const Menu = () => {
           products={products.filter(
             (product) => product.productType === "FOOD"
           )}
-          onAddToCart={handleOpenModalProduct}
+          onAddToCart={onOpenProductModal}
         />
         <MenuProductType
           title="Bebidas"
           products={products.filter(
             (product) => product.productType === "DRINK"
           )}
-          onAddToCart={handleOpenModalProduct}
+          onAddToCart={onOpenProductModal}
         />
       </div>
     </React.Fragment>
   );
 };
 
-export default Menu;
+export default observer(() => {
+  const { productStore, cartStore } = useStore();
+  const {
+    isOpen,
+    selectedProduct,
+    fetchProducts,
+    setSeletectedProduct,
+    setIsOpen,
+  } = productStore;
+  const { add } = cartStore;
+  const [products, setProducts] = useState([] as IProduct[]);
+
+  useEffect(() => {
+    fetchProducts().then((response) => setProducts(response));
+  }, [fetchProducts]);
+
+  const handleAdd = (product: IProduct, quantity: number) => {
+    add(product, quantity);
+    handleCloseProductModal();
+  };
+
+  const handleOpenProductModal = (product: IProduct) => {
+    setSeletectedProduct(product);
+    setIsOpen(true);
+  };
+
+  const handleCloseProductModal = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <Menu
+      product={selectedProduct}
+      products={products}
+      isProductModalOpen={isOpen}
+      onAdd={handleAdd}
+      onOpenProductModal={handleOpenProductModal}
+      onCloseProductModal={handleCloseProductModal}
+    />
+  );
+});

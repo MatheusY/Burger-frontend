@@ -19,7 +19,11 @@ const MenuProductType = (props: MenuProductTypeProps) => {
       </Row>
       <div className={classes.product}>
         {props.products.map((product) => (
-          <MenuProduct product={product} onClick={props.onAddToCart} />
+          <MenuProduct
+            key={product.id}
+            product={product}
+            onClick={props.onAddToCart}
+          />
         ))}
       </div>
     </Container>
