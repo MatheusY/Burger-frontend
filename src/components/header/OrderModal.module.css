@@ -1,0 +1,21 @@
+.modal {
+  color: black;
+  width: 30%;
+}
+
+.body {
+  padding: 15px 15px 5px 15px;
+  height: 80%;
+  overflow: overlay;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.7em;
+  padding: 0px 15px 0px 15px;
+}
+
+.submit {
+  float: right;
+}

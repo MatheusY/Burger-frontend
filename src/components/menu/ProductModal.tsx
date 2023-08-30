@@ -99,8 +99,8 @@ export default observer(
     onClose: () => void;
     onSubmit: (product: IProduct, quantity: number) => void;
   }) => {
-    const { cartStore } = useStore();
-    const { getQuantityByProductId } = cartStore;
+    const { orderStore } = useStore();
+    const { getQuantityByProductId } = orderStore;
     const [quantityInCart, setQuantityInCart] = useState(0);
 
     useEffect(() => {

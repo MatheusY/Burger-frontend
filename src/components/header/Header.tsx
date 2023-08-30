@@ -1,11 +1,11 @@
 import styles from "./Header.module.css";
-import HeaderCart from "./HeaderCart";
+import HeaderOrder from "./HeaderOrder";
 
 const header = () => {
   return (
     <header className={styles.header}>
       <h1>Coma bem</h1>
-      <HeaderCart />
+      <HeaderOrder />
     </header>
   );
 };

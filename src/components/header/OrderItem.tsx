@@ -1,9 +1,9 @@
 import { Fragment } from "react";
 import { IItem } from "../../models/Item";
-import styles from "./CartItem.module.css";
+import styles from "./OrderItem.module.css";
 import { IProduct } from "../../models/Product";
 
-const CartItem = ({
+const OrderItem = ({
   item,
   onEdit,
   onDelete,
@@ -44,4 +44,4 @@ const CartItem = ({
   );
 };
 
-export default CartItem;
+export default OrderItem;

@@ -52,7 +52,7 @@ const Menu = ({
 };
 
 export default observer(() => {
-  const { productStore, cartStore } = useStore();
+  const { productStore, orderStore } = useStore();
   const {
     isOpen,
     selectedProduct,
@@ -60,7 +60,7 @@ export default observer(() => {
     setSeletectedProduct,
     setIsOpen,
   } = productStore;
-  const { add } = cartStore;
+  const { add } = orderStore;
   const [products, setProducts] = useState([] as IProduct[]);
 
   useEffect(() => {

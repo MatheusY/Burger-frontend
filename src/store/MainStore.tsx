@@ -1,11 +1,11 @@
 import { useLocalStore } from "mobx-react-lite";
 import React from "react";
 import { ProductStore } from "./ProductStore";
-import { CartStore } from "./CartStore";
+import { OrderStore } from "./OrderStore";
 
 export const createWidgetStore = () => ({
   productStore: new ProductStore(),
-  cartStore: new CartStore(),
+  orderStore: new OrderStore(),
 });
 
 export type TStore = ReturnType<typeof createWidgetStore>;

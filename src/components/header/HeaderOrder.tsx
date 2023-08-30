@@ -1,55 +1,59 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./HeaderCart.module.css";
+import styles from "./HeaderOrder.module.css";
 import { useStore } from "../../store/MainStore";
 import { Fragment } from "react";
-import CartModal from "./CartModal";
+import OrderModal from "./OrderModal";
 import { observer } from "mobx-react-lite";
-import { ICart } from "../../models/Cart";
+import { IOrder } from "../../models/Order";
 import { IProduct } from "../../models/Product";
 
-const HeaderCart = ({
-  cart,
+const HeaderOrder = ({
+  order,
   quantity,
   open,
   onEdit,
   onDelete,
   onOpen,
   onClose,
+  onSubmit,
 }: {
-  cart: ICart;
+  order: IOrder;
   quantity: number;
   open: boolean;
   onEdit: (product: IProduct) => void;
   onDelete: (product: IProduct) => void;
   onOpen: () => void;
   onClose: () => void;
+  onSubmit: (order: IOrder) => void;
 }) => {
   return (
     <Fragment>
       {open && (
-        <CartModal
+        <OrderModal
           isOpen={open}
-          cart={cart}
+          order={order}
           onClose={onClose}
           onEdit={onEdit}
           onDelete={onDelete}
+          onSubmit={onSubmit}
         />
       )}
       <button
         className={styles.button}
         onClick={onOpen}
-        disabled={cart.items.length === 0}
+        disabled={order.items.length === 0}
       >
         <FontAwesomeIcon icon="shopping-cart" className={styles.icon} />
-        Meu Pedido {quantity}
+        Meu Pedido <span className={styles.badge}>{quantity}</span>
       </button>
     </Fragment>
   );
 };
 
 export default observer(() => {
-  const { cartStore, productStore } = useStore();
-  const { cart, quantityItems, isOpen, setIsOpen, onDelete } = cartStore;
+  const { orderStore, productStore } = useStore();
+  const { order, quantityItems, isOpen, setIsOpen, onDelete, onSubmitOrder } =
+    orderStore;
   const { setSeletectedProduct, setIsOpen: setProductIsOpen } = productStore;
 
   const handleEdit = (product: IProduct) => {
@@ -60,7 +64,7 @@ export default observer(() => {
 
   const handleDelete = (product: IProduct) => {
     onDelete(product);
-    if (cart.items.length === 0) {
+    if (order.items.length === 0) {
       setIsOpen(false);
     }
   };
@@ -73,15 +77,21 @@ export default observer(() => {
     setIsOpen(false);
   };
 
+  const handleSubmit = (order: IOrder) => {
+    onSubmitOrder(order);
+    setIsOpen(false);
+  };
+
   return (
-    <HeaderCart
-      cart={cart}
+    <HeaderOrder
+      order={order}
       quantity={quantityItems}
       open={isOpen}
       onEdit={handleEdit}
       onDelete={handleDelete}
       onOpen={handleOpen}
       onClose={handleClose}
+      onSubmit={handleSubmit}
     />
   );
 });
