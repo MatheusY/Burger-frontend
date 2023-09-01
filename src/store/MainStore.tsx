@@ -2,10 +2,14 @@ import { useLocalStore } from "mobx-react-lite";
 import React from "react";
 import { ProductStore } from "./ProductStore";
 import { OrderStore } from "./OrderStore";
+import { UiStore } from "./UiStore";
+import RootRouter from "../components/routers/application-routes/RootRouter";
 
 export const createWidgetStore = () => ({
+  router: RootRouter,
   productStore: new ProductStore(),
   orderStore: new OrderStore(),
+  ui: new UiStore(),
 });
 
 export type TStore = ReturnType<typeof createWidgetStore>;
