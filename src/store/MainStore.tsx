@@ -4,11 +4,13 @@ import { ProductStore } from "./ProductStore";
 import { OrderStore } from "./OrderStore";
 import { UiStore } from "./UiStore";
 import RootRouter from "../components/routers/application-routes/RootRouter";
+import { UserStore } from "./UserStore";
 
 export const createWidgetStore = () => ({
   router: RootRouter,
   productStore: new ProductStore(),
   orderStore: new OrderStore(),
+  userStore: new UserStore(),
   ui: new UiStore(),
 });
 

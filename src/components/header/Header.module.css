@@ -1,5 +1,4 @@
 .header {
-  height: 5rem;
   background-color: #8a2b06;
   color: white;
   display: flex;
@@ -8,4 +7,33 @@
   padding: 0 10%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 10;
+}
+
+.right_side {
+  display: flex;
+  align-items: center;
+
+  > div {
+    margin-left: 2em;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.navbar {
+  padding-bottom: 0 !important;
+}
+
+.navbar_item {
+  color: white !important;
+  font-weight: bolder !important;
+  font-size: x-large !important;
+  border-bottom: 3px solid transparent !important;
+
+  &:hover,
+  &:active {
+    border-bottom: 3px solid white !important;
+  }
 }

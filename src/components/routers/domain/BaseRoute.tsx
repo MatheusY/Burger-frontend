@@ -72,7 +72,6 @@ class BaseRoute {
   };
 
   public asReactRouterDomElement(): JSX.Element {
-    console.log(this.path);
     if (!this.children) {
       return (
         <Route
