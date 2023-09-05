@@ -16,8 +16,8 @@ export class ProductStore {
     "/api/products"
   );
 
-  fetchProducts = (): Promise<IProduct[]> => {
-    return this.findProductsDS.execute();
+  fetchProducts = (page?: number, size?: number): Promise<IProduct[]> => {
+    return this.findProductsDS.execute({ page, size });
   };
 
   getSelectedProduct = () => this.selectedProduct;

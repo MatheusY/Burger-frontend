@@ -1,5 +1,5 @@
-import UserEdit from "../../../user/UserEdit";
-import UserInfo from "../../../user/UserInfo";
+import UserEdit from "../../../page/user/UserEdit";
+import UserInfo from "../../../page/user/UserInfo";
 import BaseRoute from "../../domain/BaseRoute";
 import { IndexRoute } from "../../domain/IndexRoute";
 import { RootRouter } from "../RootRouter";

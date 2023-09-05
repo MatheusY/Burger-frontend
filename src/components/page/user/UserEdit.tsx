@@ -1,10 +1,10 @@
 import { observer } from "mobx-react-lite";
-import { useStore } from "../../store/MainStore";
-import { IUser } from "../../models/User";
+import { useStore } from "../../../store/MainStore";
+import { IUser } from "../../../models/User";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./UserEdit.module.css";
-import useInput from "../hooks/UseInput";
+import useInput from "../../hooks/UseInput";
 
 const UserEdit = ({
   user,

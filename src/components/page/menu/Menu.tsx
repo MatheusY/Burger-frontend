@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useStore } from "../../store/MainStore";
-import { IProduct } from "../../models/Product";
+import { useStore } from "../../../store/MainStore";
+import { IProduct } from "../../../models/Product";
 import MenuProductType from "./MenuProductType";
 import classes from "./Menu.module.css";
 import React from "react";

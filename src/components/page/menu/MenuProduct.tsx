@@ -1,6 +1,6 @@
 import { Row } from "react-bootstrap";
 import classes from "./MenuProduct.module.css";
-import { IProduct } from "../../models/Product";
+import { IProduct } from "../../../models/Product";
 
 interface MenuProductProps {
   product: IProduct;

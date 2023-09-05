@@ -1,4 +1,4 @@
-import Menu from "../../menu/Menu";
+import Menu from "../../page/menu/Menu";
 import NotFound from "../../not_found/NotFound";
 import BaseRoute from "../domain/BaseRoute";
 import { IndexRoute } from "../domain/IndexRoute";

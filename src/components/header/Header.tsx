@@ -1,7 +1,7 @@
 import styles from "./Header.module.css";
 import HeaderOrder from "./HeaderOrder";
 import { RouteRedirector } from "../routers/RouteRender";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useStore } from "../../store/MainStore";
 import { observer } from "mobx-react-lite";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,10 +14,6 @@ const Header = ({
   onMenu: () => void;
   onUser: () => void;
 }) => {
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const { router } = useStore();
-  // const {var} = useParams();
   return (
     <Fragment>
       <header className={styles.header}>
@@ -55,7 +51,7 @@ const Header = ({
 
 export default observer(() => {
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
   const { router, userStore } = useStore();
   const { user } = userStore;
 

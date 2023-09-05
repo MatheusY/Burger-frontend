@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { IProduct } from "../../models/Product";
+import { IProduct } from "../../../models/Product";
 import React from "react";
 import styles from "./ProductModal.module.css";
-import { useStore } from "../../store/MainStore";
-import Modal from "../common/Modal";
+import { useStore } from "../../../store/MainStore";
+import Modal from "../../common/Modal";
 import { observer } from "mobx-react-lite";
 
 const ProductModal = ({

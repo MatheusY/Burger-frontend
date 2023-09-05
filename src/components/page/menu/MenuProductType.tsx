@@ -1,5 +1,5 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { IProduct } from "../../models/Product";
+import { IProduct } from "../../../models/Product";
 import MenuProduct from "./MenuProduct";
 import classes from "./MenuProductType.module.css";
 
