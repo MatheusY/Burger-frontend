@@ -9,9 +9,11 @@ import { Fragment } from "react";
 
 const Header = ({
   onMenu,
+  onProducts,
   onUser,
 }: {
   onMenu: () => void;
+  onProducts: () => void;
   onUser: () => void;
 }) => {
   return (
@@ -30,6 +32,14 @@ const Header = ({
                     onClick={onMenu}
                   >
                     Menu
+                  </button>
+                </li>
+                <li className="nav-item">
+                  <button
+                    className={`nav-link ${styles.navbar_item}`}
+                    onClick={onProducts}
+                  >
+                    Products
                   </button>
                 </li>
               </ul>
@@ -59,9 +69,19 @@ export default observer(() => {
     navigate(router.indexRoute.getRedirectRoute());
   };
 
+  const handleProducts = () => {
+    navigate(router.product.indexRoute.getRedirectRoute());
+  };
+
   const handleUser = () => {
     navigate(router.user.indexRoute.getRedirectRoute({ userId: user?.id }));
   };
 
-  return <Header onMenu={handleMenu} onUser={handleUser} />;
+  return (
+    <Header
+      onMenu={handleMenu}
+      onProducts={handleProducts}
+      onUser={handleUser}
+    />
+  );
 });
